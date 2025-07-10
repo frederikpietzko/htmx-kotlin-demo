@@ -22,7 +22,7 @@ class RealtimeController(
     init {
         visitorRepository.subscribe {
             websocketSessionHolder.broadcastHtmlSnippet {
-                stats(VisitorStatistic.Companion.fromVisitors(visitorRepository.allVisitors()))
+                stats(VisitorStatistic.fromVisitors(visitorRepository.allVisitors()))
             }
         }
     }
