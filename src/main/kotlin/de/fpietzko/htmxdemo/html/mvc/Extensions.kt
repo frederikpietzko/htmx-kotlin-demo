@@ -4,7 +4,6 @@ import de.fpietzko.htmxdemo.config.websocket.ConferenceConfig
 import de.fpietzko.htmxdemo.html.templates.Template
 import jakarta.servlet.http.HttpSession
 import kotlinx.html.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import org.springframework.stereotype.Component
