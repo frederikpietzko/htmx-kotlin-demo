@@ -46,6 +46,4 @@ class ServerValidatedFormController(
             serverValidatedForm(model, visitorService.validateSubmission(model))
         }
     }
-
-
 }
