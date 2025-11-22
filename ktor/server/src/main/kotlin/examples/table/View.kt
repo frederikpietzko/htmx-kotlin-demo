@@ -51,7 +51,6 @@ class VisitorTablePage(
           }
           insertBase(VisitorTable(model))
         }
-        insertBase(VisitorTable(model))
       }
     }
   }
