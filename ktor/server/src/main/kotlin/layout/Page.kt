@@ -19,11 +19,11 @@ class Page(
       }
 
       script {
-        src = "static/htmx.min.js"
+        src = "htmx.min.js".static()
         defer = true
       }
       script {
-        src = "static/htmx.ext.sse.min.js"
+        src = "htmx.ext.sse.min.js".static()
         defer = true
       }
 

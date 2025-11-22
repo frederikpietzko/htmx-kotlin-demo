@@ -71,7 +71,7 @@ class RegisterPage(
   override fun HTML.render() {
     insertBase(CommonPage("Register")) {
       children {
-        insertBase(RegisterForm(action)) {}
+        insertBase(RegisterForm(action))
       }
     }
   }

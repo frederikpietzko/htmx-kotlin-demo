@@ -35,6 +35,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-migration-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-migration-jdbc:$exposed_version")
+    implementation("io.konform:konform-jvm:0.11.0")
     implementation("com.h2database:h2:$h2_version")
     implementation("io.ktor:ktor-server-sse")
     implementation("io.ktor:ktor-server-websockets")

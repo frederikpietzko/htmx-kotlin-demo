@@ -1,5 +1,6 @@
 package com.github.frederikpietzko.components.form
 
+import com.github.frederikpietzko.hasError
 import kotlinx.html.*
 
 data class FieldsetProps(
@@ -18,12 +19,12 @@ fun FlowContent.fieldset(props: FieldsetProps, attributeBuilder: InputAttributeB
   fieldSet("fieldset w-full") {
     props.id?.let { this.id = it }
     legend { +props.label }
-    val classes = "w-full input" + if (props.error != null) " input-error" else ""
+    val classes = "w-full input" + if (props.error.hasError()) " input-error" else ""
     input(type = props.type, name = props.name, classes = classes) {
       props.placeholder?.let { this.placeholder = it }
       attributeBuilder()
     }
-    if (props.error != null) p("fieldset-label text-red-500") {
+    if (props.error.hasError()) p("fieldset-label text-red-500") {
       +props.error
     }
     else props.helperText?.let {

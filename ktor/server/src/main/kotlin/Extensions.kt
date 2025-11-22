@@ -12,9 +12,19 @@ import kotlinx.html.FlowContent
 import kotlinx.html.HTML
 import kotlinx.html.consumers.delayed
 import kotlinx.html.stream.HTMLStreamBuilder
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 fun String.static() = "/static/$this"
 val String.idRef get() = "#$this"
+
+@OptIn(ExperimentalContracts::class)
+fun String?.hasError(): Boolean {
+  contract {
+    returns(true) implies (this@hasError != null)
+  }
+  return !this.isNullOrBlank()
+}
 
 suspend fun <TTemplate : BaseTemplate<HTML>> ApplicationCall.respondBaseTemplate(
   template: TTemplate,
@@ -59,7 +69,7 @@ suspend fun ApplicationCall.respondHtmlSnippet(
 context(application: Application)
 fun <TOuter, TTemplate : BaseTemplate<TOuter>> TOuter.insertBase(
   template: TTemplate,
-  build: TTemplate.() -> Unit
+  build: TTemplate.() -> Unit = {}
 ) {
   template.application = application
   template.build()
