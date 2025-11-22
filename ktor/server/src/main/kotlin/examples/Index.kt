@@ -3,8 +3,8 @@ package com.github.frederikpietzko.examples
 import com.github.frederikpietzko.conferenceName
 import com.github.frederikpietzko.conferenceYear
 import com.github.frederikpietzko.layout.CommonPage
+import com.github.frederikpietzko.respondBaseTemplate
 import io.ktor.server.application.*
-import io.ktor.server.html.*
 import io.ktor.server.routing.*
 import kotlinx.html.a
 import kotlinx.html.div
@@ -14,7 +14,7 @@ import kotlinx.html.p
 fun Application.index() {
   routing {
     get("/") {
-      call.respondHtmlTemplate(CommonPage("$conferenceName HTMX Demo")) {
+      call.respondBaseTemplate(CommonPage("$conferenceName HTMX Demo")) {
         children {
           div("hero bg-base-200 m-auto") {
             div("hero-content text-center") {

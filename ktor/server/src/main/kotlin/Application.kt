@@ -1,5 +1,6 @@
 package com.github.frederikpietzko
 
+import com.github.frederikpietzko.config.configureContentNegotiation
 import com.github.frederikpietzko.config.configureDatabases
 import com.github.frederikpietzko.config.configureHTTP
 import com.github.frederikpietzko.config.configureMonitoring
@@ -11,6 +12,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+  configureContentNegotiation()
   configureHTTP()
   configureDatabases()
   configureMonitoring()
