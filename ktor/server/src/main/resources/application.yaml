@@ -1,6 +1,7 @@
 conference:
   name: "Kotlin Dev Day"
   year: 2025
+  randomVisitors: true
 ktor:
   application:
     modules:

@@ -48,6 +48,7 @@ dependencies {
     implementation("io.ktor:ktor-server-request-validation")
     implementation("io.ktor:ktor-server-status-pages")
     implementation("io.ktor:ktor-server-sessions")
+    implementation("com.github.javafaker:javafaker:0.12")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
