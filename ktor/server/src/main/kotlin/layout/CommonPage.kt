@@ -29,6 +29,7 @@ class CommonPage(private val title: String) : BaseTemplate<HTML>() {
               )
             ),
             Navbar.MenuItem("Realtime", "/realtime"),
+            Navbar.MenuItem("Graph", "/graph"),
           )
         }
         content {

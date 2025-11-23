@@ -2,6 +2,7 @@ package com.github.frederikpietzko.examples
 
 import com.github.frederikpietzko.examples.form.basicForm
 import com.github.frederikpietzko.examples.form.validatedForm
+import com.github.frederikpietzko.examples.graph.graph
 import com.github.frederikpietzko.examples.realtime.realtime
 import com.github.frederikpietzko.examples.ssetable.sseTable
 import com.github.frederikpietzko.examples.table.table
@@ -14,4 +15,5 @@ fun Application.configure() {
   table()
   sseTable()
   realtime()
+  graph()
 }

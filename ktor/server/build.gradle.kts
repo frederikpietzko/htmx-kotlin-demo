@@ -47,6 +47,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson")
     implementation("io.ktor:ktor-server-request-validation")
     implementation("io.ktor:ktor-server-status-pages")
+    implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.8.0")
     implementation("io.ktor:ktor-server-sessions")
     implementation("com.github.javafaker:javafaker:0.12")
     testImplementation("io.ktor:ktor-server-test-host")
