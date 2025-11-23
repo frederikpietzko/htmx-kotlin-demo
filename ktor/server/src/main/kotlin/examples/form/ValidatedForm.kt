@@ -12,6 +12,7 @@ import io.konform.validation.constraints.minimum
 import io.konform.validation.constraints.notBlank
 import io.ktor.htmx.*
 import io.ktor.server.application.*
+import io.ktor.server.htmx.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -26,17 +27,33 @@ fun Application.validatedForm() {
         val model = call.receive<RegisterFormSubmission>()
         val result = validateFormSubmission.validate(model)
         when (result) {
-          is Invalid -> call.respondSnippetTemplate(
-            ServerValidatedForm(
-              model = model,
-              errors = result.errors
-            )
-          )
+          is Invalid ->
+            call.respondBaseTemplate(ServerValidatedRegisterPage(model = model, errors = result.errors))
 
           is Valid<*> -> {
             VisitorManagement.addVisitor(model.toVisitor())
-            call.response.header(HxResponseHeaders.Redirect, "/table")
-            call.respondText("")
+            call.respondRedirect("/table")
+          }
+        }
+        hx {
+          post {
+            val model = call.receive<RegisterFormSubmission>()
+            val result = validateFormSubmission.validate(model)
+            when (result) {
+              is Invalid ->
+                call.respondSnippetTemplate(
+                  ServerValidatedForm(
+                    model = model,
+                    errors = result.errors,
+                  )
+                )
+
+              is Valid<*> -> {
+                VisitorManagement.addVisitor(model.toVisitor())
+                call.response.header(HxResponseHeaders.Redirect, "/table")
+                call.respondText("")
+              }
+            }
           }
         }
         post("/validate") {
