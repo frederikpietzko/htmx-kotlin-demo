@@ -4,6 +4,7 @@ import com.github.frederikpietzko.domain.visitors.VisitorManagement
 import com.github.frederikpietzko.respondBaseTemplate
 import com.github.frederikpietzko.respondSnippetTemplate
 import io.ktor.server.application.*
+import io.ktor.server.htmx.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
 
@@ -16,7 +17,14 @@ fun Application.basicForm() {
       post {
         val formData = call.receive<RegisterFormSubmission>()
         VisitorManagement.addVisitor(formData.toVisitor())
-        call.respondSnippetTemplate(RegisterForm())
+        call.respondBaseTemplate(RegisterPage())
+      }
+      hx {
+        post {
+          val formData = call.receive<RegisterFormSubmission>()
+          VisitorManagement.addVisitor(formData.toVisitor())
+          call.respondSnippetTemplate(RegisterForm())
+        }
       }
     }
   }

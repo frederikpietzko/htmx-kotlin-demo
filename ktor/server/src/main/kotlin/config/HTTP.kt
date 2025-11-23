@@ -19,6 +19,6 @@ fun Application.configureHTTP() {
   }
   routing {
     staticResources("/static", "static")
-    staticResources("/", "static/webfonts")
+    staticResources("/webfonts", "static/webfonts")
   }
 }

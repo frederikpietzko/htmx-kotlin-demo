@@ -25,6 +25,8 @@ class RegisterForm(
   override fun FlowContent.render() {
     form(classes = "flex flex-col gap-4 w-sm lg:w-lg m-auto") {
       id = FORM_ID
+      action = this@RegisterForm.action
+      method = FormMethod.post
       attributes.hx {
         trigger = "submit"
         post = this@RegisterForm.action
