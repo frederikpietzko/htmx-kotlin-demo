@@ -1,38 +1,33 @@
 package com.github.frederikpietzko.domain.visitors
 
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import java.util.*
 
 object VisitorRepository {
-  private val visitors =
+  private val _visitors: MutableList<Visitor> =
     Collections.synchronizedList(
-      mutableListOf<Visitor>(
+      mutableListOf(
         Visitor.iitsDefault("Victor", 36),
         Visitor.iitsDefault("Markus", 38),
         Visitor.iitsDefault("Frederik", 27),
       )
     )
 
-  private val observers = Collections.synchronizedSet(mutableSetOf<Observer>())
+  private val _visitorsFlow = MutableSharedFlow<List<Visitor>>()
+  val visitors: SharedFlow<List<Visitor>> = _visitorsFlow
 
-  fun add(visitor: Visitor): Visitor {
-    visitors.add(visitor)
-    observers.forEach { it(visitors) }
+  suspend fun add(visitor: Visitor): Visitor {
+    _visitors.add(visitor)
+    _visitorsFlow.emit(_visitors)
     return visitor
   }
 
   fun allVisitors(): List<Visitor> {
-    return visitors.toList()
+    return _visitors.toList()
   }
 
   fun visitorCount(): Int {
-    return visitors.size
-  }
-
-  fun subscribe(observer: Observer): Unsubscribe {
-    observers.add(observer)
-    return { observers.remove(observer) }
+    return _visitors.size
   }
 }
-
-typealias Observer = (List<Visitor>) -> Unit
-typealias Unsubscribe = () -> Unit

@@ -2,12 +2,15 @@ package com.github.frederikpietzko
 
 import com.github.frederikpietzko.components.Fragment
 import com.github.frederikpietzko.layout.BaseTemplate
+import io.ktor.htmx.html.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.response.*
+import io.ktor.server.websocket.*
 import io.ktor.utils.io.charsets.*
+import io.ktor.websocket.*
 import kotlinx.html.FlowContent
 import kotlinx.html.HTML
 import kotlinx.html.consumers.delayed
@@ -25,6 +28,29 @@ fun String?.hasError(): Boolean {
   }
   return !this.isNullOrBlank()
 }
+
+suspend fun <TTemplate : BaseTemplate<FlowContent>> DefaultWebSocketServerSession.sendHtml(
+  template: TTemplate,
+  block: TTemplate.() -> Unit = {}
+) {
+  template.application = application
+  template.block()
+  with(template) {
+    block()
+  }
+  val text = renderSnippet {
+    with(template) {
+      apply()
+    }
+  }
+  send(Frame.Text(text))
+}
+
+var HxAttributes.wsConnect: String
+  get() = this["ws-connect"] ?: ""
+  set(value) {
+    this["ws-connect"] = value
+  }
 
 suspend fun <TTemplate : BaseTemplate<HTML>> ApplicationCall.respondBaseTemplate(
   template: TTemplate,
@@ -52,6 +78,14 @@ suspend fun <TTemplate : BaseTemplate<FlowContent>> ApplicationCall.respondSnipp
       apply()
     }
   }
+}
+
+fun renderSnippet(
+  block: FlowContent.() -> Unit
+) = buildString {
+  HTMLStreamBuilder(this, false, false)
+    .delayed()
+    .let { Fragment(it).block() }
 }
 
 suspend fun ApplicationCall.respondHtmlSnippet(
