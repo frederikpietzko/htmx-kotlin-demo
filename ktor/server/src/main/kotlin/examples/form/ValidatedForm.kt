@@ -10,8 +10,10 @@ import io.konform.validation.constraints.maximum
 import io.konform.validation.constraints.minLength
 import io.konform.validation.constraints.minimum
 import io.konform.validation.constraints.notBlank
+import io.ktor.htmx.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Application.validatedForm() {
@@ -33,7 +35,8 @@ fun Application.validatedForm() {
 
           is Valid<*> -> {
             VisitorManagement.addVisitor(model.toVisitor())
-            call.respondSnippetTemplate(ServerValidatedForm())
+            call.response.header(HxResponseHeaders.Redirect, "/table")
+            call.respondText("")
           }
         }
         post("/validate") {
