@@ -10,6 +10,7 @@ import com.github.frederikpietzko.layout.BaseTemplate
 import com.github.frederikpietzko.layout.CommonPage
 import io.konform.validation.ValidationError
 import io.konform.validation.messagesAtPath
+import io.ktor.htmx.*
 import io.ktor.htmx.html.*
 import io.ktor.server.application.*
 import kotlinx.html.*
@@ -75,7 +76,7 @@ class ServerValidatedForm(
           trigger = "change"
           post = validationAction
           target = "#name"
-          swap = "outerHTML"
+          swap = HxSwap.outerHtml
           select = "#name"
         }
         value = model.name
@@ -94,7 +95,7 @@ class ServerValidatedForm(
           trigger = "change"
           post = validationAction
           target = "#age"
-          swap = "outerHTML"
+          swap = HxSwap.outerHtml
           select = "#age"
         }
         value = model.age.toString()

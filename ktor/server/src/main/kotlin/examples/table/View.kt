@@ -8,6 +8,7 @@ import com.github.frederikpietzko.examples.form.RegisterForm
 import com.github.frederikpietzko.insertBase
 import com.github.frederikpietzko.layout.BaseTemplate
 import com.github.frederikpietzko.layout.CommonPage
+import io.ktor.htmx.*
 import io.ktor.htmx.html.*
 import io.ktor.server.application.*
 import kotlinx.html.*
@@ -46,7 +47,7 @@ class VisitorTablePage(
             attributes.hx {
               trigger = "load"
               get = "/table/drawer"
-              swap = "outerHTML"
+              swap = HxSwap.outerHtml
             }
           }
           insertBase(VisitorTable(model))
@@ -68,7 +69,7 @@ fun FlowContent.visitorSearchAndAddBar() {
           trigger = "keyup changed delay:500ms"
           get = "/table/searchTable"
           target = "#visitorTable"
-          swap = "outerHTML"
+          swap = HxSwap.outerHtml
         }
       }
     }

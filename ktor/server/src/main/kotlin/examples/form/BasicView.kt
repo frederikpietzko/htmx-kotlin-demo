@@ -8,6 +8,7 @@ import com.github.frederikpietzko.idRef
 import com.github.frederikpietzko.insertBase
 import com.github.frederikpietzko.layout.BaseTemplate
 import com.github.frederikpietzko.layout.CommonPage
+import io.ktor.htmx.*
 import io.ktor.htmx.html.*
 import io.ktor.server.application.*
 import kotlinx.html.*
@@ -28,7 +29,7 @@ class RegisterForm(
         trigger = "submit"
         post = this@RegisterForm.action
         target = FORM_ID.idRef
-        swap = "outerHTML"
+        swap = HxSwap.outerHtml
       }
 
       h4("text-2xl text-center font-bold text-primary") {
