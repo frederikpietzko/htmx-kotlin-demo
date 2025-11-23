@@ -40,7 +40,7 @@ class Page(
         rel = "stylesheet",
       )
       link(href = "daisyui.min.css".static(), rel = "stylesheet")
-      script { src = "tailwind.min.js".static() }
+      link(href = "styles.css".static(), rel = "stylesheet")
     }
     body {
       attributes.hx {
