@@ -5,7 +5,7 @@ import io.ktor.server.html.*
 import kotlinx.html.FlowContent
 import kotlinx.html.HTML
 
-class CommonPage(val title: String) : BaseTemplate<HTML>() {
+class CommonPage(private val title: String) : BaseTemplate<HTML>() {
   val children = Placeholder<FlowContent>()
 
   context(application: Application)
@@ -21,7 +21,13 @@ class CommonPage(val title: String) : BaseTemplate<HTML>() {
                 Navbar.MenuItem("Server Side Validation", "/form/server-validation"),
               ),
             ),
-            Navbar.MenuItem("Table", "/table"),
+            Navbar.MenuItem(
+              "Table",
+              children = listOf(
+                Navbar.MenuItem("Data Table", "/table"),
+                Navbar.MenuItem("SSE Table", "/sse-table"),
+              )
+            ),
             Navbar.MenuItem("Realtime", "/realtime"),
           )
         }

@@ -1,7 +1,6 @@
 package com.github.frederikpietzko.domain.visitors
 
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.*
 import java.util.*
 
 object VisitorRepository {
@@ -15,7 +14,10 @@ object VisitorRepository {
     )
 
   private val _visitorsFlow = MutableSharedFlow<List<Visitor>>()
-  val visitors: SharedFlow<List<Visitor>> = _visitorsFlow
+  val visitors: SharedFlow<List<Visitor>> = _visitorsFlow.asSharedFlow()
+  val lastVisitor: Flow<Visitor> = _visitorsFlow.transform {
+    emit(_visitors.last())
+  }
 
   suspend fun add(visitor: Visitor): Visitor {
     _visitors.add(visitor)

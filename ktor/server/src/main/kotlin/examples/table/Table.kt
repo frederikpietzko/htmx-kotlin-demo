@@ -13,17 +13,10 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import io.ktor.util.*
 import kotlinx.html.FlowContent
 
 fun Application.table() {
-  install(Sessions) {
-    val secretSignKey = hex("f8f9faebf0f1f2f3f4f5f6f7f8f9faeb")
-    cookie<OrderingState>("TABLE_SESSION", SessionStorageMemory()) {
-      cookie.path = "/"
-      transform(SessionTransportTransformerMessageAuthentication(secretSignKey))
-    }
-  }
+
   routing {
     route("/table") {
       get {

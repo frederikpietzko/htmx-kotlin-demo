@@ -3,6 +3,7 @@ package com.github.frederikpietzko.examples
 import com.github.frederikpietzko.examples.form.basicForm
 import com.github.frederikpietzko.examples.form.validatedForm
 import com.github.frederikpietzko.examples.realtime.realtime
+import com.github.frederikpietzko.examples.ssetable.sseTable
 import com.github.frederikpietzko.examples.table.table
 import io.ktor.server.application.*
 
@@ -11,5 +12,6 @@ fun Application.configure() {
   basicForm()
   validatedForm()
   table()
+  sseTable()
   realtime()
 }

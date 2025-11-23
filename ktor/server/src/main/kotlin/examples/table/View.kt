@@ -13,7 +13,9 @@ import io.ktor.htmx.html.*
 import io.ktor.server.application.*
 import kotlinx.html.*
 
-class VisitorDrawerPage : BaseTemplate<FlowContent>() {
+class VisitorDrawerPage(
+  private val action: String = "/table/add",
+) : BaseTemplate<FlowContent>() {
   context(_: Application)
   override fun FlowContent.render() {
     div("drawer drawer-end") {
@@ -26,7 +28,7 @@ class VisitorDrawerPage : BaseTemplate<FlowContent>() {
           attributes["aria-label"] = "close sidebar"
         }
         div("z-10 bg-base-100 p-4 min-h-full text-base-content w-[800px]") {
-          insertBase(RegisterForm("/table/add"))
+          insertBase(RegisterForm(action))
         }
       }
     }
