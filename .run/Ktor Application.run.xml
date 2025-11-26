@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Ktor Application" type="CompoundRunConfigurationType">
+    <toRun name="ApplicationKt" type="KtorApplicationConfigurationType" />
+    <toRun name="watch:css" type="js.build_tools.npm" />
+    <method v="2" />
+  </configuration>
+</component>

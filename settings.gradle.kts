@@ -1,2 +1,2 @@
 rootProject.name = "htmx-demo"
-include(":spring")
+include(":spring", ":ktor", ":ktor:server")
